@@ -1,0 +1,78 @@
+.teacher-info {
+
+    display: flex;
+    height: 500px;
+    flex-direction: column; /* Колонка для вертикального расположения */
+    max-width: 1200px; /* Максимальная ширина контейнера */
+    margin-left: 110px; /* Центрирование */
+    margin-right: auto; /* Центрирование */
+    margin-top: 40px; /* Отступ сверху */
+    padding: 20px; /* Отступы внутри контейнера */
+    border: 1px solid black; /* Черная обводка контейнера */
+    border-radius: 8px; /* Округление углов контейнера */
+    background-color: #f9f9f9; /* Цвет фона контейнера */
+}
+
+.teacher-header {
+    display: flex; /* Устанавливаем флекс-контейнер для заголовка */
+    align-items: center; /* Центрируем вертикально */
+    margin-bottom: 20px; /* Расстояние между заголовком и информацией */
+}
+
+.photo {
+    width: 150px; /* Укажите подходящий размер */
+    height: 150px;
+    background-size: cover;
+    margin-right: 20px; /* Отступ от текста */
+}
+
+.details {
+    flex-grow: 1; /* Позволяет этой секции занимать оставшееся место */
+}
+
+.teacher-info-container {
+    height: 500px;
+    margin-top: 20px; /* Отступ сверху для контейнера */
+    padding: 10px; /* Отступы внутри контейнера */
+    border: 1px solid black; /* Черная обводка контейнера */
+    border-radius: 8px; /* Округление углов контейнера */
+    background-color: #f9f9f9; /* Цвет фона контейнера */
+    width: 100%; /* Занимаем всю ширину родителя */
+    box-sizing: border-box; /* Включает padding и border в ширину */
+    overflow: hidden; /* Убираем прокрутку, чтобы текст увеличивал высоту контейнера */
+    word-wrap: break-word; /* Позволяет переносить длинные слова */
+    white-space: normal; /* Перенос строк включен */
+    line-height: 1.5; /* Высота строки для читабельности */
+}
+
+
+/* Пример того как может выглядеть стиль, чтобы контейнер располагался внизу */
+.teacher-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Оставляем элементы в начале */
+    align-items: stretch; /* Заставляем элементы занимать всю ширину */
+    /* Другие стили */
+}
+ /* Убираем прокрутку, чтобы текст увеличивал высоту контейнера */
+
+
+ #editFormContainer {
+    margin-top: 20px; /* Отступ сверху для формы */
+}
+
+#editFormContainer input,
+#editFormContainer textarea {
+    display: block;
+    margin: 10px 0; /* Вертикальные отступы */
+    margin-left: 80px; /* Отступ слева на 80 пикселей */
+    width: calc(100% - 80px); /* Скорректированная ширина, чтобы учесть сдвиг */
+    padding: 8px;
+    box-sizing: border-box; /* Включает padding в ширину элемента */
+}
+
+#editFormContainer button {
+    margin-left: 80px; /* Отступ слева на 80 пикселей для кнопки */
+    padding: 10px; /* Параметры отступа для кнопки (можно настроить) */
+    cursor: pointer; /* Курсор при наведении на кнопку */
+}

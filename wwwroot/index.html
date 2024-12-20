@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Страничка преподавателей</title>
+    <link rel="stylesheet" href="style/social.css" />
+    <link rel="stylesheet" href="style/menu.css" />
+    <link rel="stylesheet" href="style/vhod.css" />
+    <link rel="stylesheet" href="style/spicok.css" />
+</head>
+<body>
+    <div class="dropdown" style="margin-left: 1200px">
+        <button id="loginButton"
+                onclick="redirectToPage('vhod.html')"
+                class="dropbtn">
+            Войти
+        </button>
+    </div>
+
+    <ul class="border" id="userList"></ul>
+
+
+    <div class="social-icons">
+        <ul>
+            <li>
+                <a href="https://collegelan.ru/?ysclid=lvgtxaccfj655651830"
+                   target="_blank">
+                    <img src="logo/LOGO.png" alt="Сайт колледжа" title="Сайт колледжа" />
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <script src="script/menu.js"></script>
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $.getJSON('/api/users', function (data) {
+            data.forEach(function (user) {
+                console.log(user); // Выводим объект в консоль для отладки
+                $('#userList').append('<li><a href="' + user.link + '">' + user.fullName + '</a></li>')
+            });
+        });
+    });
+</script>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/vhod.css" />
+    <title>Авторизация</title>
+    <!-- Подключение ваших стилей, скриптов или других ресурсов -->
+</head>
+<body>
+    <div id="container_demo">
+        <a class="hiddenanchor" id="tosubscribe"></a>
+        <a class="hiddenanchor" id="tologin"></a>
+        <div id="wrapper">
+            <div id="login" class="animate form">
+                <form id="loginForm" autocomplete="on">
+                    <h1>Авторизация</h1>
+                    <p>
+                        <label for="username" class="uname" data-icon="u">Введите ваш логин</label>
+                        <input id="username" name="username" required="required" type="text" placeholder="Логин:" />
+                    </p>
+                    <p>
+                        <label for="password" class="youpasswd" data-icon="p">Введите ваш пароль</label>
+                        <input id="password" name="password" required="required" type="password" placeholder="Пароль:" />
+                    </p>
+                    <p class="login button">
+                        <input type="submit" value="Login" />
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Обработчик отправки формы логина
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+
+            const login = document.getElementById('username').value; // Получаем логин
+            const password = document.getElementById('password').value; // Получаем пароль
+
+            try {
+                // Отправляем запрос на аутентификацию
+                const response = await fetch('/api/login',
+                    {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ Login: login, Password: password })
+                });
+
+                if (response.ok) {
+                    const data = await response.json(); // Получаем ответ от сервера
+                    const token = data.token; // Извлекаем токен
+
+                    // Сохраняем токен в Local Storage
+                    localStorage.setItem('jwt', token);
+
+                    alert('Login successful!'); // Успешная авторизация
+                    // Перенаправление или дальнейшие действия
+                } else {
+                    const errorMessage = await response.text();
+                    alert('Login failed: ' + errorMessage); // Обработка ошибки
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred during login.'); // Обработка ошибок запроса
+            }
+        });
+    </script>
+</body>
+</html>

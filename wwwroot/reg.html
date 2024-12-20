@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрационная панель</title>
+    <link rel="stylesheet" href="style/reg.css" />
+</head>
+<body>
+    <form action="" method="post">
+        <label for="name">ФИО;</label>
+        <input type="text" id="name" name="name" placeholder="Укажите полное ФИО" required>
+
+        <label for="job">Ваша должность:</label>
+        <input type="text" id="job" name="job" placeholder="Введите вашу должность" required>
+
+        <label for="login">Логин:</label>
+        <input type="text" id="login" name="login" placeholder="Введите логин" required>
+
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+        <button id="submit">Регистрация</button>
+        <div id="message"></div>
+    </form>
+
+    <script>
+        document.getElementById("submit").addEventListener("click", send);
+
+        async function send(event) {
+            event.preventDefault(); // Остановка стандартного поведения
+
+            // Получаем значения из полей ввода
+            const name = document.getElementById("name").value;
+            const job = document.getElementById("job").value;
+            const login = document.getElementById("login").value;
+            const password = document.getElementById("password").value;
+
+            // Проверка заполненности полей (опционально)
+            if (!name || !job || !login || !password) {
+                document.getElementById("message").innerText = "Ошибка: Все поля должны быть заполнены.";
+                return;
+            }
+
+            // Отправка данных на сервер
+            const response = await fetch("/api", { // Обратите внимание на адрес API
+                method: "POST", // Используйте "POST"
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    job: job,
+                    login: login,
+                    password: password
+                })
+            });
+
+            // Обработка ответа
+            if (response.ok) {
+                const message = await response.json();
+                document.getElementById("message").innerText = "Регистрация успешна!"; // Можно добавить сообщение об успешной регистрации
+            } else {
+                const errorResponse = await response.json();
+                document.getElementById("message").innerText = "Ошибка: " + (errorResponse.error || "Неизвестная ошибка");
+            }
+        }
+    </script>
+</body>
+</html>

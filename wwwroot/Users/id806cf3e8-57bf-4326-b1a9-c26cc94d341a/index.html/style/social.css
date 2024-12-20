@@ -1,0 +1,23 @@
+.social-icons {
+    position: fixed;
+    top: 88%; /* Расположение по вертикали на 50% от верхнего края */
+    left: 20px; /* Отступ слева 40px */
+    transform: translateY(-65%); /* Центрирование по вертикали */
+}
+
+.social-icons ul {
+    list-style-type: none; /* Убираем маркеры у списка */
+    padding: 0; /* Убираем отступы у списка */
+}
+
+.social-icons li {
+    margin-bottom: 10px; /* Отступ между элементами списка */
+}
+
+.social-icons img {
+    width: 40px; /* Ширина изображения */
+    height: 40px; /* Высота изображения */
+    margin-bottom: 10px; /* Отступ между изображениями */
+}
+
+

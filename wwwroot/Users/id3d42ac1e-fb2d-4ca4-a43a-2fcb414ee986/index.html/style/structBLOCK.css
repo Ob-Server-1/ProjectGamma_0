@@ -1,0 +1,16 @@
+.block-content {
+    width: 1174px; /* Ширина блока */
+    height: 300px; /* Высота блока */
+    background-color: #f0f0f0; /* Цвет фона блока */
+    border: 1px solid #ccc; /* Обводка блока */
+    margin: 10px; /* Внешние отступы блока */
+    padding: 15px; /* Внутренние отступы блока */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Тень блока */
+    border-radius: 5px; /* Закругленные углы блока */
+    text-align: center; /* Выравнивание текста по центру внутри блока */
+    line-height: 1.5; /* Высота строки внутри блока */
+    position: relative; /* или absolute, fixed */
+    top: 300px;
+    left: 130px;
+    text-align: left; /* Выравнивание текста внутри блока по левому краю */
+}

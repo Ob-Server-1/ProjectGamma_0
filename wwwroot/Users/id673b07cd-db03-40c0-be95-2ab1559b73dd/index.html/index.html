@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Страничка преподавателя</title>
+    <link rel="stylesheet" href="style/styleLine.css" />
+    <link rel="stylesheet" href="style/social.css" />
+    <link rel="stylesheet" href="style/foto.css" />
+    <link rel="stylesheet" href="style/menu.css" />
+    <link rel="stylesheet" href="style/structBLOCK.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="line"></div>
+    </div>
+
+    <!-- Навигационное меню -->
+    <div class="dropdown" style="margin-left: 120px">
+        <button onclick="redirectToPage('index.html')" class="dropbtn">Главная</button>
+        <div class="dropdown-content"></div>
+    </div>
+
+    <div class="dropdown" style="margin-left: 40px">
+        <button onclick="myFunction(this)" class="dropbtn">Студентам</button>
+        <div class="dropdown-content">
+            <a href="schedule.html">Расписание</a>
+            <a href="disciplines.html">Дисциплины</a>
+            <a href="homework.html">Домашняя работа</a>
+            <a href="consultations.html">График консультаций</a>
+            <a href="evaluations.html">Успеваемость</a>
+        </div>
+    </div>
+
+    <div class="dropdown" style="margin-left: 40px">
+        <button onclick="redirectToPage('contact.html')" class="dropbtn">Контакты</button>
+        <div class="dropdown-content"></div>
+    </div>
+
+    <div class="dropdown" style="margin-left: 40px">
+        <button onclick="myFunction(this)" class="dropbtn">Прочее</button>
+        <div class="dropdown-content">
+            <a href="cyberDefens.html">Кибер безопасность</a>
+            <a href="conkurs.html">Конкурсы и Олимпиады</a>
+        </div>
+    </div>
+
+    <div class="teacher-info">
+        <div class="photo" id="teacherPhoto">
+            <img id="uploadedImage" src="" alt="Фото преподавателя" style="max-width: 150px; display: none;" />
+        </div>
+        <div class="details">
+            <h2 id="teacherFullName">ФИО Преподователя</h2>
+            <p id="teacherPosition">Должность</p>
+        </div>
+    </div>
+
+    <h3>Введите данные о преподавателе</h3>
+    <div id="dataFormContainer" style="display:none;">
+        <input type="text" id="fullName" placeholder="ФИО" required />
+        <input type="text" id="position" placeholder="Должность" required />
+        <textarea id="information" placeholder="Информация о преподавателе"></textarea><br><br>
+        <input type="file" id="avatar" accept="image/*" required /><br><br>
+        <button id="addDataButton">Сохранить</button>
+    </div>
+    <div id="message"></div> <!-- Для отображения сообщений об успехе или ошибках -->
+
+    <div class="social-icons">
+        <ul>
+            <li>
+                <a href="https://collegelan.ru/?ysclid=lvgtxaccfj655651830" target="_blank">
+                    <img src="logo/LOGO.png" alt="Сайт колледжа" title="Сайт колледжа" />
+                </a>
+            </li>
+            <li>
+                <a href="https://vk.com/?ysclid=lu2w0c277m958325729" target="_blank">
+                    <img src="picha/VK.png" alt="VK" title="VK" />
+                </a>
+            </li>
+            <li>
+                <a href="https://web.telegram.org/a/" target="_blank">
+                    <img src="picha/Telegram.png" alt="Telegram" title="Telegram" />
+                </a>
+            </li>
+            <li>
+                <a href="https://web.whatsapp.com/" target="_blank">
+                    <img src="picha/WhatsApp.png" alt="WhatsApp" title="WhatsApp" />
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        // Проверяемналичие токена
+        const token = localStorage.getItem('jwt');
+        if (token) { // Если токен есть, показываем форму для добавления данных
+            document.getElementById('dataFormContainer').style.display = 'block';
+        } else {
+            alert('Вы не авторизованы!'); // Если токена нет, уведомляем
+        }
+
+        // Обработчик загрузки аватара
+        document.getElementById('avatar').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const uploadedImage = document.getElementById('uploadedImage');
+                    uploadedImage.src = e.target.result; // Устанавливаем путь к изображению
+                    uploadedImage.style.display = 'block'; // Показываем изображение
+                };
+                reader.readAsDataURL(file); // Читаем файл как URL
+            }
+        });
+
+        // Логика для добавления данных
+        document.getElementById('addDataButton').addEventListener('click', async function () {
+            const fullName = document.getElementById('fullName').value;
+            const position = document.getElementById('position').value;
+            const information = document.getElementById('information').value;
+            const avatarFile = document.getElementById('avatar').files[0];
+
+            if (!token) { // Проверка на наличие токена
+                alert('Вы не авторизованы!');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('FullName', fullName);
+            formData.append('Position', position);
+            formData.append('Information', information);
+            formData.append('Avatar', avatarFile); // Добавляем аватарку в FormData
+
+            try {
+                const response = await fetch('/api/teacher/profile', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}` // Добавляем токен для аутентификации
+                    },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    document.getElementById('teacherFullName').innerText = fullName; // Обновляем ФИО
+                    document.getElementById('teacherPosition').innerText = position; // Обновляем должность
+                    document.getElementById('message').innerText = "Данные успешно сохранены!";
+                } else {
+                    const errorResponse = await response.text();
+                    document.getElementById('message').innerText = "Ошибка при сохранении данных: " + errorResponse;
+                }
+            } catch (error) {
+                console.error("Ошибка при отправке:", error);
+                document.getElementById('message').innerText = "Ошибка при отправке данных.";
+            }
+        });
+    </script>
+</body>
+</html>

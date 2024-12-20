@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Страничка преподавателя</title>
+    <link rel="stylesheet" href="style/styleLine.css" />
+    <link rel="stylesheet" href="style/social.css" />
+    <link rel="stylesheet" href="style/foto.css" />
+    <link rel="stylesheet" href="style/menu.css" />
+    <link rel="stylesheet" href="style/structBLOCK.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="line"></div>
+    </div>
+
+    <div class="dropdown" style="margin-left: 120px">
+      <button onclick="redirectToPage('index.html')" class="dropbtn">
+        Главная
+      </button>
+      <div class="dropdown-content">
+        <!-- Здесь можно добавить элементы внутрь dropdown-content, если необходимо -->
+      </div>
+    </div>
+
+    <div class="dropdown" style="margin-left: 40px">
+      <button onclick="myFunction(this)" class="dropbtn">Студентам</button>
+      <div class="dropdown-content">
+        <a href="schedule.html">Расписание</a>
+        <a href="disciplines.html">Дисциплины</a>
+        <a href="homework.html">Домашняя работа</a>
+        <a href="consultations.html">График консультаций</a>
+        <a href="evaluations.html">Успеваемость</a>
+      </div>
+    </div>
+
+    <div class="dropdown" style="margin-left: 40px">
+      <button onclick="redirectToPage('contact.html')" class="dropbtn">
+        Контакты
+      </button>
+      <div class="dropdown-content">
+        <!-- Здесь можно добавить элементы внутрь dropdown-content, если необходимо -->
+      </div>
+    </div>
+
+    <div class="dropdown" style="margin-left: 40px">
+      <button onclick="myFunction(this)" class="dropbtn">Прочее</button>
+      <div class="dropdown-content">
+        <a href="cyberDefens.html">Кибер безопасность</a>
+        <a href="conkurs.html">Конкурсы</a>
+        <a href="olimp.html">Олимпиады</a>
+      </div>
+    </div>
+
+    
+
+
+    <div class="block-content">
+      Информация о преподователе
+<!--Тут будет конетнт который будет добавлять преподователь и который должен появлятся в базе данных-->
+    </div>
+
+    <div class="social-icons">
+      <ul>
+        <li>
+          <a
+            href="https://collegelan.ru/?ysclid=lvgtxaccfj655651830"
+            target="_blank"
+            ><img src="logo/LOGO.png" alt="Сайт колледжа" title="Сайт колледжа"
+          /></a>
+        </li>
+        <li>
+          <a href="https://vk.com/?ysclid=lu2w0c277m958325729" target="_blank"
+            ><img src="picha/VK.png" alt="VK" title="ВК"
+          /></a>
+        </li>
+        <li>
+          <a href="https://web.telegram.org/a/" target="_blank"
+            ><img src="picha/Telegram.png" alt="Telegram" title="Telegram"
+          /></a>
+        </li>
+        <li>
+          <a href="https://web.whatsapp.com/" target="_blank"
+            ><img src="picha/WhatsApp.png" alt="WhatsApp" title="WhatsApp"
+          /></a>
+        </li>
+      </ul>
+    </div>
+
+    <script src="script/menu.js"></script>
+  </body>
+</html>
